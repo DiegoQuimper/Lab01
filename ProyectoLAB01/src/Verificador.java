@@ -1,97 +1,262 @@
 
 import java.util.Arrays;
 public class Verificador {
-	 private Rectangulo R1;
-	 private Rectangulo R2;
-	 private Verificador V1;
-	 public Verificador(Rectangulo R1,Rectangulo R2) {
-	 setR1(R1);
-	 setR2(R2);
-	 }
-	 public void setR1 (Rectangulo R1) {
-	 this.R1=R1;
-	 }
-	 public void setR2 (Rectangulo R2) {
-	 this.R2=R2;
-	 }
-	 public String Verific(Rectangulo R1,Rectangulo R2) {
-		 int i,j;
-		 double array[]=new double[4];
-		 Rectangulo auxR;
-		 Coordenada Esq1,Esq2,Esq3,Esq4;
-		 double X1,X2,X3,X4,Y1,Y2,Y3,Y4,aux = 0;
-		 Esq1=R1.getEsquina1();
-		 X1=Esq1.getX();
-		 Y1=Esq1.getY();
-		 Esq2=R1.getEsquina2();
-		 X2=Esq2.getX();
-		 Y2=Esq2.getY();
-		 Esq3=R2.getEsquina1();
-		 X3=Esq3.getX();
-		 Y3=Esq3.getY();
-		 Esq4=R2.getEsquina2();
-		 X4=Esq4.getX();
-		 Y4=Esq4.getY();
-		 	X4=aux;
-	 	 
-	 if (X2<X3||Y2<Y3){
-		 System.out.print("Rectangulos Ay B son disjuntos");
-	 }
-	 else if(X2==X3||Y2==Y3){
-		 System.out.print("Rectangulos Ay B se juntan");
-	 }
-
 	
-	 else{
-		 array[0]=X1;
-		 array[1]=X2;
-		 array[2]=X3;
-		 array[3]=X4;
-		 for(i=0;i<array.length-1;i++){
-			 for(j=0;j<array.length-i-1;j++){
-				 if(array[j+1]<array[j]){
-					 aux=array[j+1];
-					 array[j+1]=array[j];
-					 array[j]=aux;
-				 }
-			 }
-		 }
-		 X1=array[1];
-		 X2=array[2];
-		 array[0]=Y1;
-		 array[1]=Y2;
-		 array[2]=Y3;
-		 array[3]=Y4;
-		 for(i=0;i<array.length-1;i++){
-			 for(j=0;j<array.length-i-1;j++){
-				 if(array[j+1]<array[j]){
-					 aux=array[j+1];
-					 array[j+1]=array[j];
-					 array[j]=aux;
-				 }
-			 }
-		 }
-		 Y1=array[1];
-		 Y2=array[2];
-		 //estas variables centrales se almacenaron en X1 Y1 X2 Y2
-		 Esq1.setX(X1);
-		 Esq1.setY(Y1);
-		 Esq2.setX(X2);
-		 Esq2.setY(Y2);
-		 R1.setEsquina1(Esq1);
-		 R1.setEsquina2(Esq2);
-		 if (R1.calculoArea(Esq1, Esq2)==0)
-		{
-		 System.out.print("RectangulosA y B se juntan");
-		 }
-		 else{
-		 System.out.print("RectangulosA y B se sobreponen");
-		 System.out.print("El Area es:"+ R1.calculoArea(Esq1, Esq2)+"");
-		 	}
+//No funciona junto y disjunto	
 
-		 }
-		 return "error";
-	 }}
+	private Coordenada pu1;
+	private Coordenada pu2;
+	private Coordenada pu3;
+	private Coordenada pu4;
+	static double area=0;
+	static double x1,y1,x2,y2,x3,y3,x4,y4;
+	public Verificador(Coordenada c1, Coordenada c2, Coordenada c3, Coordenada c4) {
+		setpu1(c1);
+		setpu2(c2);
+		setpu3(c3);
+		setpu4(c4);	
+		x1=c1.getX();
+		y1=c1.getY();
+		x2=c2.getX();
+		y2=c2.getY();
+		x3=c3.getX();
+		y3=c3.getY();
+		x4=c4.getX();
+		y4=c4.getY();
+	}
+
+	public Coordenada getpu1() {
+		return pu1;
+	}
+
+	public void setpu1(Coordenada pu1) {
+		this.pu1 = pu1;
+	}
+
+	public Coordenada getpu2() {
+		return pu2;
+	}
+
+	public void setpu2(Coordenada pu2) {
+		this.pu2 = pu2;
+	}
+
+	public Coordenada getpu3() {
+		return pu3;
+	}
+
+	public void setpu3(Coordenada pu3) {
+		this.pu3 = pu3;
+	}
+
+	public Coordenada getpu4() {
+		return pu4;
+	}
+
+	public void setpu4(Coordenada pu4) {
+		this.pu4 = pu4;
+	}
+
+	public static boolean Sobrepos() {
+		int con=0;
+		double b=0,h = 0;
+		
+		if(x3<x1 && x1<x4) {
+			con=con+1;
+		}
+		if(x1<x3 && x3<x2) {
+			con=con+1;
+		}
+		if(y3<y1 && y1<y4) {
+			con=con+1;
+		}
+		if(y1<y3 && y3<y2) {
+			con=con+1;
+		}
+		if(y3<y1 && y1<y4) {
+			con=con+1;
+		}
+		if(y1<y3 && y3<y2) {
+			con=con+1;
+		}
+		
+		
+		if(x3<x1 && x1<x4||y3<y1 && y1<y4) {
+			b=x2-x1-(x4-x3);
+			h=y2-y1-(y4-y3);
+		}
+		if(x4<x1 && x1<x3||y4<y1 && y1<y3) {
+			b=x1-x2-(x3-x4);
+			h=y1-y2-(y3-y4);
+		}
+		if(x1<x3 && x3<x2||y1<y3 && y3<y2 ) {
+			b=x4-x3-(x2-x1);
+			h=y4-y3-(y2-y1);
+		}
+		if(x2<x3 && x3<x1||y2<y3 && y3<y1 ) {
+			b=x3-x4-(x1-x2);
+			h=y3-y4-(y1-y2);
+		}
+		area=b*h;
+		if (area<0) {
+			area=area*-1;
+		}
+		if(con>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public static boolean Junto() {
+		int con=0;
+		double mayorx12, menorx12, mayorx34,menorx34;
+		double mayory12, menory12, mayory34,menory34;
+		if(x1>x2) {
+			mayorx12=x1;
+			menorx12=x2;
+		}else {
+			mayorx12=x2;
+			menorx12=x1;
+		}
+		if(x3>x4) {
+			mayorx34=x3;
+			menorx34=x4;
+		}else {
+			mayorx34=x4;
+			menorx34=x3;
+		}
+		if(y1>y2) {
+			mayory12=y1;
+			menory12=y2;
+		}else {
+			mayory12=y2;
+			menory12=y1;
+		}
+		if(x3>x4) {
+			mayory34=y3;
+			menory34=y4;
+		}else {
+			mayory34=y4;
+			menory34=y3;
+		}
+		if(menorx34>menorx12 && menorx12>mayorx34 || menorx34<menorx12 && mayorx34<mayorx12) {
+			con=0;
+		}
+		if(menorx12>menorx34 && menorx34>mayorx12 || menorx12<menorx34 && mayorx12<mayorx34) {
+			con=0;
+		}
+		if(menory34>menory12 && menory12>mayory34 || menory34<menory12 && mayory34<mayory12) {
+			con=0;
+		}
+		if(menory12>menory34 && menory34>mayory12 || menory12<menory34 && mayory12<mayory34) {
+			con=0;
+		}
+		if(y2==y3) {
+			con=con+1;
+		}
+		if(y1==y4) {
+			con=con+1;
+		}
+		if(x2==x3) {
+			con=con+1;
+		}
+		if(x1==x4) {
+			con=con+1;
+		}
+
+		
+		if(con>0) {
+				return true;
+		}else {
+				return false;
+		}
+		
+	}
+	public static boolean DisJunto() {
+		int con=0;
+		double mayorx12, menorx12, mayorx34,menorx34;
+		double mayory12, menory12, mayory34,menory34;
+		if(x1>x2) {
+			mayorx12=x1;
+			menorx12=x2;
+		}else {
+			mayorx12=x2;
+			menorx12=x1;
+		}
+		if(x3>x4) {
+			mayorx34=x3;
+			menorx34=x4;
+		}else {
+			mayorx34=x4;
+			menorx34=x3;
+		}
+		if(y1>y2) {
+			mayory12=y1;
+			menory12=y2;
+		}else {
+			mayory12=y2;
+			menory12=y1;
+		}
+		if(x3>x4) {
+			mayory34=y3;
+			menory34=y4;
+		}else {
+			mayory34=y4;
+			menory34=y3;
+		}
+		if(y2==y3) {
+			con=0;
+		}
+		if(y1==y4) {
+			con=0;
+		}
+		if(x2==x3) {
+			con=0;
+		}
+		if(x1==x4) {
+			con=0;
+		}
+		
+		if(menorx34>menorx12 && menorx12>mayorx34 || menorx34<menorx12 && mayorx34<mayorx12) {
+			con=con+1;
+		}
+		if(menorx12>menorx34 && menorx34>mayorx12 || menorx12<menorx34 && mayorx12<mayorx34) {
+			con=con+1;
+		}
+		if(menory34>menory12 && menory12>mayory34 || menory34<menory12 && mayory34<mayory12) {
+			con=con+1;
+		}
+		if(menory12>menory34 && menory34>mayory12 || menory12<menory34 && mayory12<mayory34) {
+			con=con+1;
+		}
+		if(x3<x1 && x1<x4) {
+			con=0;
+		}
+		if(x1<x3 && x3<x2) {
+			con=0;
+		}
+		if(y3<y1 && y1<y4) {
+			con=0;
+		}
+		if(y1<y3 && y3<y2) {
+			con=0;
+		}
+		if(y3<y1 && y1<y4) {
+			con=0;
+		}
+		if(y1<y3 && y3<y2) {
+			con=0;
+		}
+		
+		if(con>0) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+}
 		 
 
 

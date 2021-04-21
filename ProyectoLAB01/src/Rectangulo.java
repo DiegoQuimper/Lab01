@@ -15,24 +15,7 @@ public class Rectangulo {
 		 this.R1=R1; 
 	} 
 	
-//Prueba2
-	
-	//public void setEsquina1 (Coordenada coo) { 
-		//this.esquina1=coo;
-		 //} 
-		//public void setEsquina2 (Coordenada coo) {
-		 //this.esquina2=coo; 
-		//} 
-		//public Coordenada getEsquina1 () {
-		 //return esquina1;
-		 //} 
-		//public Coordenada getEsquina2 () {
-		 //return esquina2;
-		 //}
-//Termina prueba2
-	
-	
-	
+
 	public Coordenada getEsquina1() {
 		return this.esquina1;
 	}
@@ -50,7 +33,7 @@ public class Rectangulo {
 	}
 	
 	
-	public double calculoArea(Coordenada c1, Coordenada c2) { 
+	public static double calculoArea(Coordenada c1, Coordenada c2) { 
 		double area,Y,X; 
 		X=c1.getX()-c2.getX(); 
 		Y=c1.getY()-c2.getY();
